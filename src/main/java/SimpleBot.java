@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class SimpleBot extends TelegramLongPollingBot {
 
-    private static String api = "AIzaSyDbdptE7pjHYR8rJ6xtDA-Luj1k2AJij30";
+    //private static String api = "AIzaSyDbdptE7pjHYR8rJ6xtDA-Luj1k2AJij30";
     private String url;
     private int step = 0;
     private String[] strings = new String[3];
@@ -120,7 +120,7 @@ public class SimpleBot extends TelegramLongPollingBot {
             String shorten = shortenUrl(big);
             sendMsg(message, "Полная ссылка: " + big);
             sendMsg(message, "Короткая ссылка: " + shorten);
-            sendMsg(message, "Бот сделан по заказу канала компании in-top marketing @marketinglikbez. Нужен бот? Обращайтесь - @mmtretiak");
+            sendMsg(message, "Бот сделан по заказу канала компании in-top marketing @marketinglikbez. Нужен бот? Обращайтесь - @tretir");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -130,9 +130,16 @@ public class SimpleBot extends TelegramLongPollingBot {
     }
 
     String doUtm (){
-        String result = url;
-        result = result + "?utm_source=" + strings[0] + "&utm_medium=" + strings[1] + "&utm_campaign=" + strings[2];
-        return result;
+        StringBuilder str = new StringBuilder(url);
+        //String result = url;
+        str.append("?utm_source=");
+        str.append(strings[0]);
+        str.append("&utm_medium=");
+        str.append(strings[1]);
+        str.append("&utm_campaign=");
+        str.append(strings[2]);
+        //result = result + "?utm_source=" + strings[0] + "&utm_medium=" + strings[1] + "&utm_campaign=" + strings[2];
+        return str.toString();
     }
 
     public static String shortenUrl(String longUrl) throws IOException, JSONException {
